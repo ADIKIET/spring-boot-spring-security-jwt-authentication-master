@@ -1,0 +1,74 @@
+
+Database Script to use the application
+------------------------------------------------
+DROP TABLE user_roles
+DROP TABLE users
+DROP TABLE roles
+
+SELECT * FROM public.roles
+ORDER BY id ASC 
+
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
+
+Spring Security APIS
+-------------------------------------
+1. SignUp
+
+POST http://localhost:8080/api/auth/signup
+
+BODY
+{
+  "username": "user1",
+  "email": "adi@gmail.com",
+  "password": "password1234",
+  "role": ["ROLE_ADMIN", "ROLE_USER"]
+}
+
+2. Signin
+
+POST   http://localhost:8080/api/auth/signin
+
+BODY
+{
+  "username": "user1",
+  "password": "password1234"
+}
+
+Response Received from API:
+{
+"id": 1,
+"username": "user1",
+"email": "adi@gmail.com",
+"roles":[
+"ROLE_USER"
+],
+"tokenType": "Bearer",
+"accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNzg4MTY0NywiZXhwIjoxNzI3OTY4MDQ3fQ.bwRCwI8lw2q4uj9uPWO4EaYJIOqh2-wyRyqHfsbSLeI"
+}
+
+
+
+Testing APIS
+------------------------------------------
+1. GET Request : http://localhost:8080/api/test/all
+
+	Response: Public Content.
+
+
+2. GET Request :  http://localhost:8080/api/test/user
+	with  Header
+	Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNzg4MTY0NywiZXhwIjoxNzI3OTY4MDQ3fQ.bwRCwI8lw2q4uj9uPWO4EaYJIOqh2-wyRyqHfsbSLeI
+
+	Response: User Content.
+
+
+3. GET Request :  http://localhost:8080/api/test/mod
+
+
+
+4. GET Request :  http://localhost:8080/api/test/admin
+
+
