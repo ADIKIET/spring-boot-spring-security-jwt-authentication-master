@@ -48,6 +48,9 @@ $env:JWT_SECRET = "replace-with-a-long-random-signing-key"
 The JWT signing key must be long enough for the configured signing algorithm. Do not commit local credentials or signing keys.
 
 ## Run Spring Boot application
+
+Java 25 or later is required.
+
 ```
 mvn spring-boot:run
 ```
